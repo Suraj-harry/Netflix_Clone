@@ -1,20 +1,19 @@
-// replace below firebase config with your own
+import { initializeApp } from "firebase/app";
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "0f99b079a6f10c3bedad7a295a957983",
-    authDomain: "netflix-clone-d1fa8.firebaseapp.com",
-    projectId: "netflix-clone-d1fa8",
-    storageBucket: "netflix-clone-d1fa8.appspot.com",
-    messagingSenderId: "1080602120235",
-    appId: "1:1080602120235:web:29e7c05415df6c1cd65a6e"
-  };
+  apiKey: "AIzaSyBKmfqvij-PTgmQlalj7UE0dk-dfJAz_Tc",
+  authDomain: "netflix-clone-9ddfb.firebaseapp.com",
+  projectId: "netflix-clone-9ddfb",
+  storageBucket: "netflix-clone-9ddfb.firebasestorage.app",
+  messagingSenderId: "290452787476",
+  appId: "1:290452787476:web:2af20b4eff6dcfd6447201"
+};
 
-
-
-// craete a/c on themoviedb.org and replace access token below
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 
 const TMDB_Access_Key="eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZjk5YjA3OWE2ZjEwYzNiZWRhZDdhMjk1YTk1Nzk4MyIsIm5iZiI6MTc1Mzc2NDY2Mi4wMDQsInN1YiI6IjY4ODg1MzM1NDk5M2YyNDk2ODI0NzVkMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VHvBVD555autGEQ_tKFeMYucL6C8IyAmsufcJMHnM-M";
 
-
-  export {firebaseConfig, TMDB_Access_Key};
+export {firebaseConfig, TMDB_Access_Key};
