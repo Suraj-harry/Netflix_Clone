@@ -3,10 +3,10 @@ import './Player.css'
 import back_arrow_icon from '../../assets/back_arrow_icon.png'
 import { useNavigate, useParams } from 'react-router-dom'
 import { TMDB_Access_Key } from '../../config'
- 
-const Player = (props) => {
-  const state = props.location;
-  const {id} = useParams();
+
+const Player = () => {
+
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [apiData, setApiData] = useState({
@@ -14,7 +14,7 @@ const Player = (props) => {
     key: "",
     published_at: "",
     type: ""
-  })
+  });
 
   const options = {
     method: 'GET',
@@ -24,26 +24,42 @@ const Player = (props) => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
-    .then(response => response.json())
-    .then(response => setApiData(response.results[0]))
-    .catch(err => console.error(err));
-    console.log(props);
-  },[])
-  
-  
+      .then(res => res.json())
+      .then(data => {
+        const youtubeVideo = data.results.find(
+          video => video.site === "YouTube"
+        );
+        if (youtubeVideo) {
+          setApiData(youtubeVideo);
+        }
+      })
+      .catch(err => console.error(err));
+  }, [id]);
 
   return (
     <div className='player'>
-      <img src={back_arrow_icon} alt="" onClick={()=>{navigate(-2)}}/>
-      <iframe src={`https://www.youtube.com/embed/${apiData.key}`}
-      title='trailer' frameBorder='0' allowFullScreen></iframe>
+
+      <img
+        src={back_arrow_icon}
+        alt="back"
+        onClick={() => navigate(-1)}
+      />
+
+      <iframe
+        src={`https://www.youtube.com/embed/${apiData?.key}`}
+        title="trailer"
+        frameBorder="0"
+        allowFullScreen
+      ></iframe>
+
       <div className="player-info">
-        <p>{apiData.published_at.slice(0,10)}</p>
-        <p>{state}</p>
-        <p>{apiData.type}</p>
+        <p>{apiData?.published_at?.slice(0,10)}</p>
+        <p>{apiData?.name}</p>
+        <p>{apiData?.type}</p>
       </div>
+
     </div>
   )
 }
